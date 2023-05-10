@@ -7,6 +7,8 @@
     display: flex;
     justify-content: center;
     padding-top: 120px;
+    flex-direction: column;
+    align-items: center;
   }
 </style>
 
@@ -14,7 +16,11 @@
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
+      {% if request.user.is_authenticated %}
       <span class="mdl-layout-title">Welcome, {{ request.user.first_name }} !</span>
+      {% else %}
+      <p>You have to logg in</p>
+      {% endif %}
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
@@ -38,6 +44,14 @@
   <main class="mdl-layout__content">
     <div class="page-content">
 
+      {% if request.user.is_authenticated %}
+
+      {% for message in messages %}
+      <div>
+        {{ message.author.first_name}}:  {{ message.text }}
+      </div>
+      {% endfor %}
+
       <form action="/chat/" method="POST">
         {% csrf_token %}
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -48,7 +62,11 @@
           Send
         </button>
       </form>
-
+      {% else %}
+      <h1>Not logged in</h1>
+      <p>You have to logg in</p><br>
+      Please click <a href="/login/">here</a>.
+      {% endif %}
 
     </div>
   </main>
