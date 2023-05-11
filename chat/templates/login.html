@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+
 <h1>Login Page</h1>
 
 {% if wrongPassword %}
@@ -16,3 +19,6 @@
         <button>Login</button>
     </div>
 </form>
+<p>New to Easychat</p><br>
+Please register <a href="/register/">here</a>.
+{% endblock %}

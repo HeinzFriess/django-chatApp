@@ -2,6 +2,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .models import Chat, Message
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
+@login_required(login_url='/login/')
 
 def index(request):
     if request.method == 'POST':
@@ -21,5 +25,22 @@ def loginView(request):
             return render(request, 'login.html', {'wrongPassword': True})
 
     return render(request, 'login.html', {'messages' : 'Hallo'})
+
+def registerView(request):
+    if request.method == 'POST':
+        _password = request.POST.get('password')
+        _passwordrepeat = request.POST.get('passwordrepeat')
+        print(_password)
+        print(_passwordrepeat)
+        if _password == _passwordrepeat:
+            user = User.objects.create_user(username = request.POST.get('username'), email = None, password = _password)
+            login(request, user)
+            return HttpResponseRedirect('/chat/')
+       
+        else:
+            return render(request, 'register.html', {'wrongPassword': True})
+        
+    return render(request, 'register.html', {'messages' : 'Hallo'})
+
 
 
