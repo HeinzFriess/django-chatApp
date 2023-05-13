@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Register Page</h1>
+<h1>Register</h1>
+<h4>Enter your credentials</h4>
 
 {% if wrongPassword %}
 <p>misstyped password, please try again</p>
@@ -9,20 +10,28 @@
 
 <form method="POST" action="/register/">
     {% csrf_token %}
-    <div>
-        <label class="mdl-textfield__label" for="sampl1">name...</label>
-        <input class="mdl-textfield__input" name="username" type="text" id="sampl1">
+    <div class="mdl-textfield">
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" name="username" type="text" id="sampl1">
+            <label class="mdl-textfield__label" type="text" for="sampl1">name...</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" name="firstname_lastname" type="text" id="sampl11">
+            <label class="mdl-textfield__label" type="text" for="sampl11">firstname / lastname</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__label" for="sampl2">password...</label>
+            <input class="mdl-textfield__input" type="password" name="password" type="text" id="sampl2">
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__label" for="sampl2">repeat password...</label>
+            <input class="mdl-textfield__input" type="password" name="passwordrepeat" type="text" id="sampl3">
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <br>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">Send</button>
+        </div>
     </div>
-    <div>
-        <input class="mdl-textfield__input" name="password" type="text" id="sampl1">
-        <label class="mdl-textfield__label" for="sampl1">password...</label>
-    </div>
-    <div>
-        <input class="mdl-textfield__input" name="passwordrepeat" type="text" id="sampl1">
-        <label class="mdl-textfield__label" for="sampl1">repeat password...</label>
-    </div>
-    <div>
-        <button>Login</button>
-    </div>
+
 </form>
 {% endblock %}

@@ -1,36 +1,95 @@
 {% extends "base.html" %}
 {% block content %}
-
-
-{% if request.user.is_authenticated %}
-
-{% for message in messages %}
-<div>
-  {{ message.author.first_name}}: {{ message.text }}
-</div>
-{% endfor %}
-
+<script src="./../../../static/js/script.js"></script>
 <script>
+  function getDate() {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"];
+    let dateObj = new Date();
+    let month = dateObj.getUTCMonth() + 1; //months from 1-12
+    let day = dateObj.getUTCDate();
+    let year = dateObj.getUTCFullYear();
+
+    return monthNames[month-1] + " " + day + ", " + year;
+  }
+
   async function sendMessage() {
     let fd = new FormData();
-    let token = '{{ csrf_token}}';
+    let token = '{{ csrf_token }}';
     fd.append('textmessage', messageField.value);
     fd.append('csrfmiddlewaretoken', token);
     try {
+      document.getElementById('messageContainer').innerHTML += `
+         <div class="mdl-card" id="toDelete">
+          <div class="mdl-card__title">
+            <span class="color-gray"> [${getDate()}] : {{ request.user.first_name}}</span>
+          </div>
+          <div class="mdl-card__media color-gray" >
+            ${messageField.value}
+          </div>
+        </div>
+      `;
       let response = await fetch('/chat/', {
         method: 'POST',
         body: fd
-      });
-      console.log('Success', response);   
+      })
+      let json = await response.json();
+
+      console.log(json);
+
+      document.getElementById('toDelete').remove();
+
+      document.getElementById('messageContainer').innerHTML += `
+        <div class="mdl-card">
+          <div class="mdl-card__title">
+            <span class="color-gray"> [${getDate()}] : {{ request.user.first_name}}</span>
+          </div>
+          <div class="mdl-card__media color-gray" >
+            ${messageField.value}
+          </div>
+        </div>
+      `;
+      messageField.value = '';
     } catch (error) {
       console.error(e);
     }
   }
 </script>
+<style>
+  .mdl-card {
+    min-height: 60px;
+    border-radius: 12px;
+    border-style: ridge;
+    margin-bottom: 12px;
+}
+.mdl-card__media {
+  background-color: lightgray;
+  padding: 12px;
+}
+.mdl-textfield__label {
+  right: unset;
+  left: unset;
+}
+</style>
+<h1>Welcome to easyChat</h1>
+<h4>Your secure Communication App</h4>
 
+{% if request.user.is_authenticated %}
 
-<!-- <form action="/chat/" method="POST"> -->
-<form onsubmit="sendMessage(); return false"  method="POST">
+<div id="messageContainer">
+  {% for message in messages %}
+  <div class="mdl-card">
+    <div class="mdl-card__title">
+      <span class="color-gray"> [{{ message.created_at }}] : {{ message.author.first_name}}</span>
+    </div>
+    <div class="mdl-card__media">
+      {{ message.text }}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<form onsubmit="sendMessage(); return false" method="POST">
   {% csrf_token %}
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField">
@@ -41,8 +100,8 @@
   </button>
 </form>
 {% else %}
-<h1>Not logged in</h1>
-<p>You have to logg in</p><br>
+<h1>You are not logged in</h1>
+<p>You have to logg in first</p><br>
 Please click <a href="/login/">here</a>.
 {% endif %}
 {% endblock %}

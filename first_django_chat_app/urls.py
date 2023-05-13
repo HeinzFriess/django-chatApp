@@ -23,4 +23,5 @@ urlpatterns = [
     path('chat/', index),
     path('login/', loginView),
     path('register/', registerView),
+    path('', loginView),
 ]
