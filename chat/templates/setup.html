@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Setup</h1>
+<h2>Choose your Backgroud</h2>
+
+{% if wrongPassword %}
+<p>Wrong username or password</p>
+{% endif %}
+
+<form method="POST" sendSetUp()>
+    {% csrf_token %}
+    
+    <img onclick="setBackground('rain')" class="backGroundButton" id="select" src="./../../static/img/rain.jpg"></img>
+    <img onclick="setBackground('texture')" class="backGroundButton" id="select" src="./../../static/img/texture.jpg"></img>
+   
+    
+</form>
+
+{% endblock %}

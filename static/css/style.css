@@ -1,3 +1,7 @@
+body{
+    background-image: url("./../img/texture.jpg");
+}
+
 .page-content {
     display: flex;
     justify-content: center;
@@ -27,6 +31,12 @@
 .mdl-textfield__label {
   right: unset;
   left: unset;
+}
+
+.backGroundButton{
+    height: 120px;
+    width: 120px;
+    cursor: pointer;
 }
 
 
