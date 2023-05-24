@@ -11,14 +11,13 @@ function getDate() {
 
   async function sendMessage() {
     let fd = new FormData();
-    let token = '{{ csrf_token }}';
     fd.append('textmessage', messageField.value);
-    fd.append('csrfmiddlewaretoken', token);
+    fd.append('csrfmiddlewaretoken', csrfToken);
     try {
       document.getElementById('messageContainer').innerHTML += `
          <div class="mdl-card" id="toDelete">
           <div class="mdl-card__title">
-            <span class="color-gray"> [${getDate()}] : {{ request.user.first_name}}</span>
+            <span class="color-gray"> [${getDate()}] : [${userName}] </span>
           </div>
           <div class="mdl-card__media color-gray" >
             ${messageField.value}
@@ -31,14 +30,12 @@ function getDate() {
       })
       let json = await response.json();
 
-      console.log(json);
-
       document.getElementById('toDelete').remove();
 
       document.getElementById('messageContainer').innerHTML += `
         <div class="mdl-card">
           <div class="mdl-card__title">
-            <span class="color-gray"> [${getDate()}] : {{ request.user.first_name}}</span>
+            <span class="color-gray"> [${getDate()}] : [${userName}] </span>
           </div>
           <div class="mdl-card__media color-gray" >
             ${messageField.value}
@@ -47,8 +44,6 @@ function getDate() {
       `;
       messageField.value = '';
     } catch (error) {
-      console.error(e);
+      console.error(error);
     }
   }
-
-console.log('is loading script')

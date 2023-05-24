@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<script src="./../../../static/js/script.js"></script>
+<!-- <script src="./../../../static/js/script.js"></script> -->
 <script>
-    
-  
+  const csrfToken = '{{ csrf_token }}';
+  const userName = '{{ request.user.first_name}}';
+  // Use the csrfToken variable in your JavaScript code
 </script>
 <style>
   .mdl-card {
