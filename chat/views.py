@@ -9,6 +9,9 @@ from django.core import serializers
 @login_required(login_url='/login/')
 
 def index(request):
+    """
+    This view renders the chat HTML.
+    """
     data = {'null':'null'}
     if request.method == 'POST':
         print("Received data" + request.POST['textmessage'])
@@ -22,6 +25,9 @@ def index(request):
    
 
 def loginView(request):
+    """
+    This view renders the logIn HTML.
+    """
     if request.method == 'POST':
         user = authenticate(username = request.POST.get('username'), password = request.POST.get('password'))
         if user:
@@ -33,6 +39,9 @@ def loginView(request):
     return render(request, 'login.html', {'messages' : 'Hallo'})
 
 def registerView(request):
+    """
+    This view renders the register HTML.
+    """
     if request.method == 'POST':
         _password = request.POST.get('password')
         _passwordrepeat = request.POST.get('passwordrepeat')
