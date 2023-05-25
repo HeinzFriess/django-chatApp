@@ -62,8 +62,10 @@ def setupView(request):
     This view replies the setup HTML.
     """
     if request.method == 'POST':
-        serialized_obj = serializers.serialize('json', 'tbd') 
-        return JsonResponse(serialized_obj[1:-1], safe=False) #[1.-1] erzeugt einen substring vom 2 zeichen (index1) bis zum vorletzten
+        _img = request.POST.get('img')
+        #return HttpResponseRedirect('/chat/')
+        #return JsonResponse({'img':_img})
+        return render(request, 'chat/index.html')
     # chatMessages = Message.objects.filter(chat__id=1)
     return render(request, 'setup.html', {'messages' : 'tbd'})
 

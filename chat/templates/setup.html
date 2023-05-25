@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
+<script>
+    const csrfToken = '{{ csrf_token }}';
+    // const userName = '{{ request.user.first_name}}';
+</script>
+
 <h1>Setup</h1>
 <h2>Choose your Backgroud</h2>
 
@@ -8,13 +13,11 @@
 <p>Wrong username or password</p>
 {% endif %}
 
-<form method="POST" sendSetUp()>
-    {% csrf_token %}
-    
-    <img onclick="setBackground('rain')" class="backGroundButton" id="select" src="./../../static/img/rain.jpg"></img>
-    <img onclick="setBackground('texture')" class="backGroundButton" id="select" src="./../../static/img/texture.jpg"></img>
-   
-    
-</form>
+
+
+<img onclick="setBackground('rain')" class="backGroundButton" id="select" src="./../../static/img/rain.jpg"></img>
+<img onclick="setBackground('texture')" class="backGroundButton" id="select" src="./../../static/img/texture.jpg"></img>
+<br>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="window.location.href='../chat/'">close</button>
 
 {% endblock %}

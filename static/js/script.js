@@ -49,7 +49,18 @@ async function sendMessage() {
 }
 
 function setBackground(img) {
+  localStorage.setItem('background', img)
   const body = document.getElementsByTagName('body')[0];
   body.style.backgroundImage = `url("/static/img/${img}.jpg")`;
-  console.log('hier ist der Bildname', img);
+  //window.location = "../chat/";
 }
+
+function initBackground(){
+  let value = localStorage.getItem('background');
+  if(value)
+  {
+    setBackground(value);
+  }
+}
+
+initBackground();
