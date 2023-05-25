@@ -7,6 +7,10 @@
     align-items: center;
 }
 
+.page-content h1 {
+  text-align: center;
+}
+
 .color-gray{
     color: gray;
   }

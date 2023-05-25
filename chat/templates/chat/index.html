@@ -25,7 +25,7 @@
   {% endfor %}
 </div>
 
-<form onsubmit="sendMessage(); return false" method="POST">
+<form class="mdl-card" onsubmit="sendMessage(); return false" method="POST">
   {% csrf_token %}
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField">
