@@ -2,13 +2,22 @@
 .page-content {
     display: flex;
     justify-content: center;
-    padding-top: 120px;
+    padding-top: 36px;
     flex-direction: column;
     align-items: center;
 }
 
 .page-content h1 {
   text-align: center;
+}
+
+#messageContainer{
+  width: 90%;
+}
+
+.authorMessage{
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .color-gray{
@@ -24,6 +33,7 @@
     border-radius: 12px;
     border-style: ridge;
     margin-bottom: 12px;
+    width: 260px;
 }
 .mdl-card__media {
   background-color: lightgray;

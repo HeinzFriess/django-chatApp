@@ -14,7 +14,7 @@
 
 <div id="messageContainer">
   {% for message in messages %}
-  <div class="mdl-card">
+  <div class="mdl-card {% if message.author.first_name == user.first_name %}authorMessage{% endif %}">
     <div class="mdl-card__title">
       <span class="color-gray"> [{{ message.created_at }}] : {{ message.author.first_name}}</span>
     </div>
@@ -25,7 +25,9 @@
   {% endfor %}
 </div>
 
-<form class="mdl-card" onsubmit="sendMessage(); return false" method="POST">
+
+<footer class = "mdl-layout_footer">
+  <form class="mdl-card" onsubmit="sendMessage(); return false" method="POST">
   {% csrf_token %}
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField">
@@ -35,6 +37,7 @@
     Send
   </button>
 </form>
+</footer>
 {% else %}
 <h1>You are not logged in</h1>
 <p>You have to logg in first</p><br>
