@@ -42,6 +42,11 @@
 .mdl-textfield__label {
   right: unset;
   left: unset;
+  color: rgb(255,255,255);
+}
+
+.mdl-layout{
+  overflow-y: hidden;
 }
 
 .backGroundButton{
@@ -50,4 +55,31 @@
     cursor: pointer;
 }
 
+.footer{
+  height: 64px;
+  background-color: rgb(63,81,181);
+  z-index: 3;
+  display: flex;
+}
 
+.textfield{
+  color: white;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+.tftext{
+  background-color: white;
+  width: 200px;
+}
+.tflabel{
+  width: 200px;
+}
+
+.tfbutton{
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}

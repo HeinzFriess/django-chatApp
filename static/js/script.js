@@ -15,9 +15,9 @@ async function sendMessage() {
   fd.append('csrfmiddlewaretoken', csrfToken);
   try {
     document.getElementById('messageContainer').innerHTML += `
-         <div class="mdl-card" id="toDelete">
+         <div class="mdl-card authorMessage" id="toDelete">
           <div class="mdl-card__title">
-            <span class="color-gray"> [${getDate()}] : [${userName}] </span>
+            <span class="color-gray"> [${getDate()}] : ${userName} </span>
           </div>
           <div class="mdl-card__media color-gray" >
             ${messageField.value}
@@ -28,14 +28,13 @@ async function sendMessage() {
       method: 'POST',
       body: fd
     })
-    let json = await response.json();
-
+    
     document.getElementById('toDelete').remove();
 
     document.getElementById('messageContainer').innerHTML += `
-        <div class="mdl-card">
+        <div class="mdl-card authorMessage">
           <div class="mdl-card__title">
-            <span class="color-gray"> [${getDate()}] : [${userName}] </span>
+            <span class="color-gray"> [${getDate()}] : ${userName} </span>
           </div>
           <div class="mdl-card__media color-gray" >
             ${messageField.value}
@@ -43,6 +42,7 @@ async function sendMessage() {
         </div>
       `;
     messageField.value = '';
+    window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
   } catch (error) {
     console.error(error);
   }

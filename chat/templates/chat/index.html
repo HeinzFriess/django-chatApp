@@ -26,18 +26,7 @@
 </div>
 
 
-<footer class = "mdl-layout_footer">
-  <form class="mdl-card" onsubmit="sendMessage(); return false" method="POST">
-  {% csrf_token %}
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField">
-    <label class="mdl-textfield__label" for="messageField">Text...</label>
-  </div>
-  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-    Send
-  </button>
-</form>
-</footer>
+
 {% else %}
 <h1>You are not logged in</h1>
 <p>You have to logg in first</p><br>
